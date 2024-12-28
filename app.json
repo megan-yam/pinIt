@@ -13,16 +13,37 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.meganyam.pinIt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.meganyam.pinIt"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibWVnYW55YW0iLCJhIjoiY201N3ExcXM1MDdmbTJubzljOGJ0ZDBnOSJ9.RBizi9p1UQbPDFz1ZC5P-Q"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Show current location on map."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9c4aa798-f40d-4b88-bdda-6d70dacbf24e"
+      }
     }
   }
 }
