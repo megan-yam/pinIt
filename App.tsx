@@ -37,12 +37,14 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureDetector gesture={longTap}>
       <View style={styles.container}>
         <Mapbox.MapView style={styles.map} styleURL={Mapbox.StyleURL.Street}>
           <Camera followZoomLevel={8} followUserLocation/>
           <Mapbox.UserLocation visible={true} />
         </Mapbox.MapView>
       </View>
+      </GestureDetector>
     </GestureHandlerRootView>
   );
 };
