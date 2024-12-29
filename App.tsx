@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Alert } from "react-native";
-import Mapbox from "@rnmapbox/maps";
+import Mapbox, { Camera } from "@rnmapbox/maps";
 import * as Location from "expo-location";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from 'react-native-gesture-handler'; 
 
 Mapbox.setAccessToken(
   "pk.eyJ1IjoibWVnYW55YW0iLCJhIjoiY201MGh1OW1wMWdsNjJub2RnemFnODZieiJ9.WrX1uSxj4JO8BG80gI-vkA"
@@ -27,12 +29,21 @@ const App = () => {
     return null;
   }
 
+  const longTap = Gesture.LongPress().onEnd((e, success) => {
+    if (success) {
+      console.log(`Long pressed for ${e.duration} ms!`);
+    }
+  });
+
   return (
-    <View style={styles.container}>
-      <Mapbox.MapView style={styles.map} styleURL={Mapbox.StyleURL.Street}>
-        <Mapbox.UserLocation visible={true} />
-      </Mapbox.MapView>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Mapbox.MapView style={styles.map} styleURL={Mapbox.StyleURL.Street}>
+          <Camera followZoomLevel={8} followUserLocation/>
+          <Mapbox.UserLocation visible={true} />
+        </Mapbox.MapView>
+      </View>
+    </GestureHandlerRootView>
   );
 };
 
