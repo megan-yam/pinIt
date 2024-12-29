@@ -4,6 +4,7 @@ import Mapbox, { Camera } from "@rnmapbox/maps";
 import * as Location from "expo-location";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { GestureHandlerRootView } from 'react-native-gesture-handler'; 
+import { Menu, MenuOption, MenuOptions, MenuProvider } from "react-native-popup-menu";
 
 Mapbox.setAccessToken(
   "pk.eyJ1IjoibWVnYW55YW0iLCJhIjoiY201MGh1OW1wMWdsNjJub2RnemFnODZieiJ9.WrX1uSxj4JO8BG80gI-vkA"
@@ -36,16 +37,25 @@ const App = () => {
   });
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <GestureDetector gesture={longTap}>
-      <View style={styles.container}>
-        <Mapbox.MapView style={styles.map} styleURL={Mapbox.StyleURL.Street}>
-          <Camera followZoomLevel={8} followUserLocation/>
-          <Mapbox.UserLocation visible={true} />
-        </Mapbox.MapView>
-      </View>
-      </GestureDetector>
-    </GestureHandlerRootView>
+    <MenuProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureDetector gesture={longTap}>
+        <View style={styles.container}>
+          <Mapbox.MapView style={styles.map} styleURL={Mapbox.StyleURL.Street}>
+            <Camera followZoomLevel={8} followUserLocation/>
+            <Mapbox.UserLocation visible={true} />
+          </Mapbox.MapView>
+        <Menu>
+          <MenuOptions>
+            <MenuOption onSelect={() => alert(`Save`)} text='Save' />
+            <MenuOption onSelect={() => alert(`Delete`)} text='Delete'/>
+            <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
+          </MenuOptions>
+        </Menu>
+        </View>
+        </GestureDetector>
+      </GestureHandlerRootView>
+    </MenuProvider>
   );
 };
 
